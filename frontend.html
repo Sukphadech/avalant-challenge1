@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Users Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      margin-top: 10px;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Users Table</h2>
+
+  <!-- Search -->
+  <input id="search" placeholder="Search name or email" />
+  <button onclick="searchUsers()">Search</button>
+
+  <!-- Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>CreatedAt</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div>
+    <button onclick="prevPage()">Prev</button>
+    <span id="pageInfo"></span>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <script>
+    const API_URL = "http://localhost:3001/api/users";
+    let page = 1;
+    const pageSize = 5;
+    let total = 0;
+    let search = "";
+
+    async function loadUsers() {
+      const params = new URLSearchParams({
+        page,
+        pageSize,
+        search
+      });
+
+      const res = await fetch(`${API_URL}?${params.toString()}`);
+      const data = await res.json();
+
+      total = data.total;
+      renderTable(data.items);
+      renderPageInfo();
+    }
+
+    function renderTable(users) {
+      const tbody = document.getElementById("tbody");
+      tbody.innerHTML = "";
+
+      if (users.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4">No data</td></tr>`;
+        return;
+      }
+
+      users.forEach(u => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${u.id}</td>
+          <td>${u.name || ""}</td>
+          <td>${u.email || ""}</td>
+          <td>${u.createdAt || ""}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderPageInfo() {
+      const totalPages = Math.ceil(total / pageSize) || 1;
+      document.getElementById("pageInfo").textContent =
+        `Page ${page} / ${totalPages}`;
+    }
+
+    function nextPage() {
+      if (page * pageSize < total) {
+        page++;
+        loadUsers();
+      }
+    }
+
+    function prevPage() {
+      if (page > 1) {
+        page--;
+        loadUsers();
+      }
+    }
+
+    function searchUsers() {
+      page = 1;
+      search = document.getElementById("search").value;
+      loadUsers();
+    }
+
+    // initial load
+    loadUsers();
+  </script>
+
+</body>
+</html>
