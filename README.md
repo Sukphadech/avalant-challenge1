@@ -1,73 +1,103 @@
-Full-Stack Practical Assignment (Partial Submission)
+# 🚀 Full-Stack Practical Assignment (Partial Submission)
 
-This project demonstrates a simple full-stack user listing system with server-side pagination and search.
-Due to local disk space constraints, a lightweight HTML frontend was used instead of a full React build, while still validating the complete client–server flow.
+This project demonstrates a **simple full-stack user listing system** with **server-side pagination and search**.
 
-🧩 Features Implemented
-Backend (Node.js + Express)
--REST API for users
--Server-side pagination
--Server-side search (name / email)
--Defensive input handling (query validation)
--CORS enabled
--Robust handling of edge cases (undefined / invalid inputs)
+Due to **local disk space constraints**, a **lightweight HTML + JavaScript frontend** was used instead of a full React build, while still validating the **complete client–server flow**.
 
-Frontend (HTML only)
--Plain HTML + JavaScript (no npm, no build tools)
--Fetch API for data loading
--Search input (press Enter or click Search)
--Pagination (Prev / Next)
--Displays real backend data
+---
 
-📁 Project Structure
+## ✨ Features
+
+### 🔧 Backend (Node.js + Express)
+
+* REST API for user listing
+* Server-side pagination
+* Server-side search (name / email)
+* Defensive input handling (query validation)
+* CORS enabled
+* Robust handling of edge cases (undefined / invalid inputs)
+
+### 🎨 Frontend (HTML only)
+
+* Plain HTML + Vanilla JavaScript
+* No npm, no build tools required
+* Fetch API for data loading
+* Search input (Enter key or Search button)
+* Pagination controls (Previous / Next)
+* Displays real backend data
+
+---
+
+## 📁 Project Structure
+
+```
 backend/
- ├─ index.js        # Express server
- ├─ users.js        # Mock user data
- └─ package.json
+├─ index.js        # Express server
+├─ users.js        # Mock user data
+└─ package.json
 
-frontend.html       # Lightweight frontend UI
+frontend.html      # Lightweight frontend UI
+```
 
+---
 
-🚀 How to Run
-1️⃣ Start Backend
+## ▶️ How to Run
+
+### 1️⃣ Start Backend Server
+
+```bash
 cd backend
 npm install
 npm run dev
-
+```
 
 Backend will be available at:
+
+```
 http://localhost:3001
+```
 
-Test API directly:
+---
 
+### 2️⃣ Test API Directly
+
+```
 http://localhost:3001/api/users
+```
 
-2️⃣ Open Frontend
+---
 
-Simply open the file in a browser:
+### 3️⃣ Open Frontend
 
+Simply open the following file in a browser:
+
+```
 frontend.html
-
+```
 
 No build step required.
 
-🔍 API Endpoint
-GET /api/users
+---
 
-Query Parameters
+## 🔍 API Endpoint
 
-page (number, default: 1)
+### `GET /api/users`
 
-pageSize (number, default: 10)
+#### Query Parameters
 
-search (string, optional)
+| Name     | Type   | Default | Description                   |
+| -------- | ------ | ------- | ----------------------------- |
+| page     | number | 1       | Page number                   |
+| pageSize | number | 10      | Items per page                |
+| search   | string | —       | Search by name or email       |
+| sortBy   | string | id      | id | name | email | createdAt |
+| sortDir  | string | asc     | asc | desc                    |
 
-sortBy (id | name | email | createdAt)
+---
 
-sortDir (asc | desc)
+### Response Example
 
-Response
-
+```json
 {
   "items": [
     {
@@ -80,42 +110,46 @@ Response
   "page": 1,
   "pageSize": 10
 }
+```
 
-🧠 Design Decisions
-Why HTML instead of React?
+---
 
-Due to limited local disk space, installing node_modules for a frontend framework was not feasible.
-To avoid blocking progress, a minimal HTML + Fetch implementation was chosen to:
+## 🧠 Design Decisions
 
-Demonstrate full client–server integration
+### Why HTML instead of React?
 
-Validate pagination and search logic
+Due to **limited local disk space**, installing frontend dependencies (`node_modules`) was not feasible.
 
-Keep the solution lightweight and functional
+To avoid blocking progress, a **minimal HTML + Fetch API implementation** was chosen to:
 
-This approach still proves understanding of frontend–backend communication without relying on tooling.
+* Demonstrate full client–server integration
+* Validate pagination and search logic
+* Keep the solution lightweight and functional
 
-⚠️ Limitations
+This approach still proves understanding of **frontend–backend communication** without relying on heavy tooling.
 
-No frontend framework (React/Vue) due to environment constraints
+---
 
-No automated tests included
+## ⚠️ Limitations
 
-UI styling kept minimal by design
+* No frontend framework (React / Vue) due to environment constraints
+* No automated tests included
+* UI styling kept minimal by design
 
-✅ What This Demonstrates
+---
 
-Understanding of REST APIs
+## ✅ What This Demonstrates
 
-Server-side pagination & filtering
+* Understanding of RESTful APIs
+* Server-side pagination and filtering
+* Defensive coding practices
+* Practical engineering trade-offs
+* Ability to deliver under constraints
 
-Defensive coding practices
+---
 
-Practical engineering trade-offs
+## 📝 Notes
 
-Ability to deliver under constraints
+This is a **partial submission**, intentionally aligned with the assignment guideline allowing partial delivery with clear technical explanations.
 
-📝 Notes
-
-Partial submission was intentional and aligned with the assignment guideline allowing partial delivery with explanations.
-  
+---
